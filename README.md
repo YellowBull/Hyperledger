@@ -108,7 +108,9 @@ cd ~/fabric-tools <br/>
 
 ## 项目部署
 
-### yoeman 快速生成架构
+### 单节点部署
+
+#### yoeman 快速生成架构
 
 yo hyperledger-composer:businessnetwork <br/>
 your-network <br/>
@@ -118,13 +120,13 @@ your e-mail <br/>
 Apache-2.0 <br/>
 your project namespace <br/>
 
-### 替换架构内容
+#### 替换架构内容
 
 替换mode/*.cto 文件 （可参考 org.acme.biznet.cto） <br/>
 替换lib/*.js文件 （可参考 logic.js） <br/>
 增加permissions.acl文件 （可参考 permissions.acl） <br/>
 
-### 部署
+#### 部署
 
 composer archive create -t dir -n . <br/>
 composer runtime install --card PeerAdmin@hlfv1 --businessNetworkName tutorial-network <br/>
@@ -137,7 +139,7 @@ never use namespaces <br/>
 No  <br/>
 Yes <br/>
 No <br/>
-
+http://localhostL3000
 
 
 
