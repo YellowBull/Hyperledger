@@ -24,17 +24,11 @@ centos7的操作系统我就不说了，这个是基础
 
 #### docker 环境搭建
 
-添加docker资源库的配置文件 <br/>
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo <br/>
-通过docker资源文件下载docker <br/>
 yum install docker-ce <br/>
-查看dockers运行状态 <br/>
 systemctl status docker <br/>
-启动docker <br/>
 systemctl start docker <br/>
-查看安装生成的文件 <br/>
 rpm -ql docker-ce <br/>
-修改用户权限，把需要操作docker的用户加入docker用户组 <br/>
 usermod -G docker,wheel username <br/>
 
 #### docker-compose 环境搭建
@@ -53,7 +47,6 @@ sudo ln -s /usr/local/src/node-v8.9.3-linux-x64/bin/npm /usr/local/bin/npm <br/>
 
 #### cmpm 环境搭建（用于国内替代npm）
 
-cnpm环境搭建 <br/>
 npm install -g cnpm --registry=https://registry.npm.taobao.org <br/>
 
 #### git 环境搭建
@@ -78,8 +71,7 @@ cd Python-3.5.0 <br/>
 ./configure --prefix=/usr/local/python3 <br/>
 make && make install <br/>
 ln -s /usr/local/python3/bin/python3.5 /usr/local/bin/python3 <br/>
-如果提示：Ignoring ensurepip failure: pip 7.1.2 requires SSL/TLS <br/>
-这是原因没有安装或升级oenssl: <br/>
+* 如果提示：Ignoring ensurepip failure: pip 7.1.2 requires SSL/TLS <br/>
 yum install openssl-devel <br/>
 再次重复编译方案python3.5 <br/>
 
@@ -92,6 +84,7 @@ npm install -g yo <br/>
 npm install -g composer-playground <br/>
 composer-playground <br/>
 此时已经可以尝试http://localhost:8080/login <br/>
+
 mkdir ~/fabric-tools && cd ~/fabric-tools <br/>
 curl -O https://raw.githubusercontent.com/hyperledger/composer-tools/master/packages/fabric-dev-servers/fabric-dev-servers.zip <br/>
 unzip fabric-dev-servers.zip <br/>
@@ -122,9 +115,9 @@ your project namespace <br/>
 
 #### 替换架构内容
 
-替换mode/*.cto 文件 （可参考 org.acme.biznet.cto） <br/>
-替换lib/*.js文件 （可参考 logic.js） <br/>
-增加permissions.acl文件 （可参考 permissions.acl） <br/>
+替换mode/*.cto 文件 （可参考 Single-Organizetion/org.acme.biznet.cto） <br/>
+替换lib/*.js文件 （可参考 Single-Organizetion/logic.js） <br/>
+增加permissions.acl文件 （可参考 Single-Organizetion/permissions.acl） <br/>
 
 #### 部署
 
@@ -140,6 +133,54 @@ No  <br/>
 Yes <br/>
 No <br/>
 http://localhostL3000
+
+### 多节点部署
+
+git clone -b issue-6978 https://github.com/sstone1/fabric-samples.git
+./byfn.sh -m generate
+
+* 如果出错
+vim bootstrap-1.0.1.sh
+内容参考Multi-organization/bootstrap-1.0.1.sh
+./bootstrap-1.0.1.sh
+
+* 如果没出错则继续
+./byfn.sh -m up -s couchdb -a
+composer card delete -n PeerAdmin@byfn-network-org1-only
+composer card delete -n PeerAdmin@byfn-network-org1
+composer card delete -n PeerAdmin@byfn-network-org2-only
+composer card delete -n PeerAdmin@byfn-network-org2
+composer card delete -n alice@tutorial-network
+composer card delete -n bob@tutorial-network
+composer card delete -n admin@tutorial-network
+composer card delete -n PeerAdmin@fabric-network
+
+* 记住或者查看
+crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+
+* 以下内容均参考Multi-organization/下内容
+
+vim connection-org1-only.json
+文本中'INSERT_ORG1_CA_CERT_FILE_PATH'
+用crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt替换
+
+文本中'INSERT_ORDERER_CA_CERT_FILE_PATH'
+用crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt替换
+
+vim connection-org1.json
+文本中'INSERT_ORG1_CA_CERT_FILE_PATH'
+用'crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt'替换
+
+文本中'INSERT_ORG2_CA_CERT_FILE_PATH'
+用'crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt'替换
+
+文本中'INSERT_ORDERER_CA_CERT_FILE_PATH'
+用'crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt'替换
+
+
+
+
 
 
 
