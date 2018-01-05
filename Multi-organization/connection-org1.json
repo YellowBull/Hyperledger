@@ -1,0 +1,44 @@
+{
+    "name": "byfn-network-org1",
+    "type": "hlfv1",
+    "mspID": "Org1MSP",
+    "peers": [
+        {
+            "requestURL": "grpcs://localhost:7051",
+            "eventURL": "grpcs://localhost:7053",
+            "cert": "INSERT_ORG1_CA_CERT_FILE_PATH",
+            "hostnameOverride": "peer0.org1.example.com"
+        },
+        {
+            "requestURL": "grpcs://localhost:8051",
+            "eventURL": "grpcs://localhost:8053",
+            "cert": "INSERT_ORG1_CA_CERT_FILE_PATH",
+            "hostnameOverride": "peer1.org1.example.com"
+        },
+        {
+            "requestURL": "grpcs://localhost:9051",
+            "cert": "INSERT_ORG2_CA_CERT_FILE_PATH",
+            "hostnameOverride": "peer0.org2.example.com"
+        },
+        {
+            "requestURL": "grpcs://localhost:10051",
+            "cert": "INSERT_ORG2_CA_CERT_FILE_PATH",
+            "hostnameOverride": "peer1.org2.example.com"
+        }
+    ],
+    "ca": {
+        "url": "https://localhost:7054",
+        "name": "ca-org1",
+        "cert": "INSERT_ORG1_CA_CERT_FILE_PATH",
+        "hostnameOverride": "ca.org1.example.com"
+    },
+    "orderers": [
+        {
+            "url" : "grpcs://localhost:7050",
+            "cert": "INSERT_ORDERER_CA_CERT_FILE_PATH",
+            "hostnameOverride": "orderer.example.com"
+        }
+    ],
+    "channel": "mychannel",
+    "timeout": 300
+}
