@@ -51,8 +51,35 @@ sudo ln -s /usr/local/src/node-v8.9.3-linux-x64/bin/npm /usr/local/bin/npm <br/>
 
 #### cmpm 环境搭建（用于国内替代npm）
 
-cnpm环境搭建
-npm install -g cnpm --registry=https://registry.npm.taobao.org
+cnpm环境搭建 <br/>
+npm install -g cnpm --registry=https://registry.npm.taobao.org <br/>
+
+#### git 环境搭建
+
+sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker <br/>
+wget https://github.com/git/git/archive/v2.9.5.zip <br/>
+unzip v2.9.5.zip <br/>
+cd git-2.9.5 <br/>
+make prefix=/usr/local/git all <br/>
+sudo make prefix=/usr/local/git install <br/>
+sudo vim /etc/profile <br/>
+export PATH=/usr/local/git/bin:$PATH <br/>
+source /etc/profile <br/>
+
+#### python 环境搭建
+
+yum groupinstall 'Development Tools' <br/>
+yum install zlib-devel bzip2-devel  openssl-devel ncurses-devel <br/>
+wget  https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz <br/>
+tar Jxvf  Python-3.5.0.tar.xz <br/>
+cd Python-3.5.0 <br/>
+./configure --prefix=/usr/local/python3 <br/>
+make && make install <br/>
+ln -s /usr/local/python3/bin/python3.5 /usr/local/bin/python3 <br/>
+如果提示：Ignoring ensurepip failure: pip 7.1.2 requires SSL/TLS <br/>
+这是原因没有安装或升级oenssl: <br/>
+yum install openssl-devel <br/>
+再次重复编译方案python3.5 <br/>
 
 
 
