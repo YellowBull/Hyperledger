@@ -132,63 +132,106 @@ never use namespaces <br/>
 No  <br/>
 Yes <br/>
 No <br/>
-http://localhostL3000
+http://localhostL3000 <br/>
 
 ### 多节点部署
 
-git clone -b issue-6978 https://github.com/sstone1/fabric-samples.git
-./byfn.sh -m generate
+git clone -b issue-6978 https://github.com/sstone1/fabric-samples.git <br/>
+./byfn.sh -m generate <br/>
 
-* 如果出错
-vim bootstrap-1.0.1.sh
-内容参考Multi-organization/bootstrap-1.0.1.sh
-./bootstrap-1.0.1.sh
+* 如果出错 <br/>
+vim bootstrap-1.0.1.sh <br/>
+内容参考Multi-organization/bootstrap-1.0.1.sh <br/>
+./bootstrap-1.0.1.sh <br/>
 
-* 如果没出错则继续
-./byfn.sh -m up -s couchdb -a
-composer card delete -n PeerAdmin@byfn-network-org1-only
-composer card delete -n PeerAdmin@byfn-network-org1
-composer card delete -n PeerAdmin@byfn-network-org2-only
-composer card delete -n PeerAdmin@byfn-network-org2
-composer card delete -n alice@tutorial-network
-composer card delete -n bob@tutorial-network
-composer card delete -n admin@tutorial-network
-composer card delete -n PeerAdmin@fabric-network
+* 如果没出错则继续 <br/>
+./byfn.sh -m up -s couchdb -a <br/>
+composer card delete -n PeerAdmin@byfn-network-org1-only <br/>
+composer card delete -n PeerAdmin@byfn-network-org1 <br/>
+composer card delete -n PeerAdmin@byfn-network-org2-only <br/>
+composer card delete -n PeerAdmin@byfn-network-org2 <br/>
+composer card delete -n alice@tutorial-network <br/>
+composer card delete -n bob@tutorial-network <br/>
+composer card delete -n admin@tutorial-network <br/>
+composer card delete -n PeerAdmin@fabric-network <br/>
 
-* 记住或者查看
-crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
-crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+记住或者查看 <br/>
+crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp <br/>
+crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp <br/>
 
-* 以下内容均参考Multi-organization/下内容
+以下内容均参考Multi-organization/下内容 <br/>
 
-vim connection-org1-only.json
-文本中'INSERT_ORG1_CA_CERT_FILE_PATH'
-用crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt替换
+vim connection-org1-only.json <br/>
+文本中`INSERT_ORG1_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt`替换 <br/>
 
-文本中'INSERT_ORDERER_CA_CERT_FILE_PATH'
-用crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt替换
+文本中`INSERT_ORDERER_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt`替换 <br/>
 
-vim connection-org1.json
-文本中'INSERT_ORG1_CA_CERT_FILE_PATH'
-用'crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt'替换
+vim connection-org1.json <br/>
+文本中`INSERT_ORG1_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt`替换 <br/>
 
-文本中'INSERT_ORG2_CA_CERT_FILE_PATH'
-用'crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt'替换
+文本中`INSERT_ORG2_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt`替换 <br/>
 
-文本中'INSERT_ORDERER_CA_CERT_FILE_PATH'
-用'crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt'替换
+文本中`INSERT_ORDERER_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt`替换 <br/>
+
+vim connection-org2-only.json <br/>
+文本中`INSERT_ORG2_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt`替换 <br/>
+
+文本中`INSERT_ORDERER_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt`替换 <br/>
+
+vim connection-org2.json <br/>
+文本中`INSERT_ORG2_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt`替换 <br/>
+
+文本中`INSERT_ORG1_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt`替换 <br/>
+
+文本中`INSERT_ORDERER_CA_CERT_FILE_PATH` <br/>
+用`crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt`替换 <br/>
+
+把`crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp`路径下的`signcerts`下的`Admin@org1.example.com-cert.pem`拷贝到`first-network`中 <br/>
+把`crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp`路径下的`keystore`下的`xxxx_ky`拷贝到`first-network`中 <br/>
+
+把`crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp`路径下的`signcerts`下的`Admin@org2.example.com-cert.pem`拷贝到`first-network`中 <br/>
+把`crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp`路径下的`keystore`下的`xxxx_ky`拷贝到`first-network`中 <br/>
+
+composer card create -p connection-org1-only.json -u PeerAdmin -c Admin@org1.example.com-cert.pem -k 78f2139bfcfc0edc7ada0801650ed785a11cfcdef3f9c36f3c8ca2ebfa00a59c_sk -r PeerAdmin -r ChannelAdmin <br/>
+
+composer card create -p connection-org1.json -u PeerAdmin -c Admin@org1.example.com-cert.pem -k 78f2139bfcfc0edc7ada0801650ed785a11cfcdef3f9c36f3c8ca2ebfa00a59c_sk -r PeerAdmin -r ChannelAdmin <br/>
+
+composer card create -p connection-org2-only.json -u PeerAdmin -c Admin@org2.example.com-cert.pem -k d4889cb2a32e167bf7aeced872a214673ee5976b63a94a6a4e61c135ca2f2dbb_sk -r PeerAdmin -r ChannelAdmin <br/>
+
+composer card create -p connection-org2.json -u PeerAdmin -c Admin@org2.example.com-cert.pem -k d4889cb2a32e167bf7aeced872a214673ee5976b63a94a6a4e61c135ca2f2dbb_sk -r PeerAdmin -r ChannelAdmin <br/>
+
+composer card import -f PeerAdmin@byfn-network-org1-only.card <br/>
+composer card import -f PeerAdmin@byfn-network-org1.card <br/>
+composer card import -f PeerAdmin@byfn-network-org2-only.card <br/>
+composer card import -f PeerAdmin@byfn-network-org2.card <br/>
+composer runtime install -c PeerAdmin@byfn-network-org1-only -n tutorial-network <br/>
+composer runtime install -c PeerAdmin@byfn-network-org2-only -n tutorial-network <br/>
+
+vim endorsement-policy.json <br/>
+
+composer identity request -c PeerAdmin@byfn-network-org1-only -u admin -s adminpw -d alice <br/>
+composer identity request -c PeerAdmin@byfn-network-org2-only -u admin -s adminpw -d bob <br/>
+
+composer network start -c PeerAdmin@byfn-network-org1 -a tutorial-network@0.0.1.bna -o endorsementPolicyFile=endorsement-policy.json -A alice -C alice/admin-pub.pem -A bob -C bob/admin-pub.pem <br/>
+
+composer card create -p connection-org1.json -u alice -n tutorial-network -c alice/admin-pub.pem -k alice/admin-priv.pem <br/>
+composer card import -f alice@tutorial-network.card <br/>
+composer network ping -c alice@tutorial-network <br/>
+composer card create -p connection-org2.json -u bob -n tutorial-network -c bob/admin-pub.pem -k bob/admin-priv.pem <br/>
+composer card import -f bob@tutorial-network.card
+composer network ping -c bob@tutorial-network <br/>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+# end
 
