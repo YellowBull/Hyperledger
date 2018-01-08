@@ -29,7 +29,7 @@ curl http://rest-api:8080/blocks <br/>
 
 * 使用intkey创建和提交事务 <br/>
 intkey create_batch --count 10 --key-count 5  <br/>
-intkey load -f batches.intkey -U http：// rest-api：8080 <br/>
+intkey load -f batches.intkey -U http:// rest-api:8080 <br/>
 
 * 用锯齿批处理提交交易 <br/>
 sawtooth batch submit -f batches.intkey --url http://rest-api:8080 <br/>
