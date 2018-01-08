@@ -1,6 +1,8 @@
 # Hyperledger Sawtooth 环境安装
 
-## 安装相关镜像镜像
+## Docker 下环境安装 Sawtooth
+
+### 安装相关镜像镜像
 
 * 新建一个工作目录 <br/>
 mkdir sawtooth <br/>
@@ -17,7 +19,7 @@ vim http-proxy.conf <br/>
 cd sawtooth <br/>
 docker-compose -f sawtooth-default.yaml up <br/>
 
-## 登录到客户端容器
+### 登录到客户端容器
 
 * 指定客户端容器名称,登录到客户端容器 <br/>
 docker exec -it sawtooth-shell-default bash <br/>
@@ -25,7 +27,7 @@ docker exec -it sawtooth-shell-default bash <br/>
 * 确认连接 <br/>
 curl http://rest-api:8080/blocks <br/>
 
-## 使用锯齿和CLI命令
+### 使用锯齿和CLI命令
 
 * 使用intkey创建和提交事务 <br/>
 intkey create_batch --count 10 --key-count 5  <br/>
@@ -40,7 +42,7 @@ sawtooth block list --url http://rest-api:8080 <br/>
 * 查看特定块 <br/>
 sawtooth block show --url http://rest-api:8080 {BLOCK_ID} <br/>
 
-## 查看全局状态
+### 查看全局状态
 
 * 查看节点列表（地址） <br/>
 sawtooth state list --url http://rest-api:8080 <br/>
@@ -48,7 +50,7 @@ sawtooth state list --url http://rest-api:8080 <br/>
 * 在地址查看数据 <br/>
 sawtooth state show --url http://rest-api:8080 {STATE_ADDRESS} <br/>
 
-## 连接到REST API
+### 连接到REST API
 
 * 从客户端容器 <br/>
 curl http://rest-api:8080/blocks <br/>
@@ -56,7 +58,7 @@ curl http://rest-api:8080/blocks <br/>
 * 从主机操作系统 <br/>
 curl http://localhost:8080/blocks <br/>
 
-## 连接到每个容器
+### 连接到每个容器
 
 * 客户端容器 <br/>
 docker exec -it sawtooth-shell-default bash <br/>
@@ -81,6 +83,8 @@ docker logs {CONTAINER} <br/>
 
 * 配置事务系列的列表 <br/>
 docker exec -it sawtooth-validator-default bash <br/>
+
+## Centos 下安装环境 Sawtooth
 
 
 
