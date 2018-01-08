@@ -10,7 +10,6 @@ vim sawtooth-default.yaml <br/>
 sudo mkdir -p /etc/systemd/system/docker.service.d <br/>
 cd /etc/systemd/system/docker.service.d/ <br/>
 vim http-proxy.conf <br/>
-
 `[Service]` <br/>
 `Environment="HTTP_PROXY=http://proxy.example.com:80/"` <br/>
 
