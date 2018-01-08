@@ -119,8 +119,8 @@ your project namespace <br/>
 
 #### 替换架构内容
 
-替换mode/*.cto 文件 （可参考 Single-Organizetion/org.acme.biznet.cto） <br/>
-替换lib/*.js文件 （可参考 Single-Organizetion/logic.js） <br/>
+替换mode/\*.cto 文件 （可参考 Single-Organizetion/org.acme.biznet.cto） <br/>
+替换lib/\*.js文件 （可参考 Single-Organizetion/logic.js） <br/>
 增加permissions.acl文件 （可参考 Single-Organizetion/permissions.acl） <br/>
 
 #### 部署
