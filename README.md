@@ -165,14 +165,14 @@ crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/ms
 
 以下内容均参考Multi-organization/下内容 <br/>
 
-vim connection-org1-only.json <br/>
+* vim connection-org1-only.json <br/>
 文本中`INSERT_ORG1_CA_CERT_FILE_PATH` <br/>
 用`crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt`替换 <br/>
 
 文本中`INSERT_ORDERER_CA_CERT_FILE_PATH` <br/>
 用`crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt`替换 <br/>
 
-vim connection-org1.json <br/>
+* vim connection-org1.json <br/>
 文本中`INSERT_ORG1_CA_CERT_FILE_PATH` <br/>
 用`crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt`替换 <br/>
 
@@ -182,14 +182,14 @@ vim connection-org1.json <br/>
 文本中`INSERT_ORDERER_CA_CERT_FILE_PATH` <br/>
 用`crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt`替换 <br/>
 
-vim connection-org2-only.json <br/>
+* vim connection-org2-only.json <br/>
 文本中`INSERT_ORG2_CA_CERT_FILE_PATH` <br/>
 用`crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt`替换 <br/>
 
 文本中`INSERT_ORDERER_CA_CERT_FILE_PATH` <br/>
 用`crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt`替换 <br/>
 
-vim connection-org2.json <br/>
+* vim connection-org2.json <br/>
 文本中`INSERT_ORG2_CA_CERT_FILE_PATH` <br/>
 用`crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt`替换 <br/>
 
@@ -237,5 +237,5 @@ composer network ping -c bob@tutorial-network <br/>
 
 
 
-# end
+# End
 
