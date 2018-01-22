@@ -9,6 +9,7 @@
 ## 准备工作
 
 要运行Hyperledger Composer和Hyperledger Fabric，建议您至少拥有4Gb的内存。
+没有个翻墙软件，根本玩不起来，[萤火虫](https://github.com/yinghuocho/firefly-proxy)你可以玩玩
 
 ### 以下是安装所需开发工具的先决条件：
 
