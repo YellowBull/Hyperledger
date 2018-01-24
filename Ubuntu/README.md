@@ -4,7 +4,8 @@
 
 * ubuntu 16.0+ <br/>
 * docker 17.0+ <br/>
-
+### ubuntu 升级
+`sudo do-release-upgrade`<br/> 
 ### Docker 环境搭建
 
 #### Docker环境搭建[原始方式](https://yeasy.gitbooks.io/docker_practice/content/install/ubuntu.html)这里就不展示了<br/>
@@ -242,7 +243,7 @@ add457f79d57        dev-peer0.org2.example.com-mycc-1.0   "chaincode -peer.a..."
 ### 总结
 其中与单机部署最大的不同的地方就是在单机部署的时候，我们是在同一个docker网络中，所以相互之间通过主机名通讯很容易，而在多机环境中，就需要额外设置DNS或者就是通过extra_hosts参数，设置容器中的hosts文件。而且不能一股脑的就跟cli一样把5台机器的域名IP配置到peer中，那样会报错的，所以只需要设置需要的即可。<br/>
  
- 
+
 
 
 
