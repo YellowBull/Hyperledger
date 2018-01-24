@@ -25,11 +25,11 @@
 #### 镜像加速 (不加速保证你后悔)<br/>
 
 #### 在 `/etc/docker/daemon.json` 中写入以下信息 <br/>
-`{ <br/>
-  "registry-mirrors": [ <br/>
-    "https://registry.docker-cn.com" <br/>
-  ] <br/>
-}` <br/>
+`{ `<br/>
+`  "registry-mirrors": `[ <br/>
+`    "https://registry.docker-cn.com"` <br/>
+`  ] `<br/>
+`}` <br/>
 #### 之后重新启动服务 <br/>
 `systemctl daemon-reload` <br/>
 `systemctl restart docker` <br/>
@@ -38,7 +38,7 @@
 #### 检查加速器是否生效 <br/>
 
 `docker info` <br/>
-输出 `Registry Mirrors: <br/>
- https://registry.docker-cn.com/` <br/>
+输出 `Registry Mirrors: `<br/>
+` https://registry.docker-cn.com/` <br/>
 
 
