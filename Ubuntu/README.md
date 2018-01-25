@@ -56,6 +56,7 @@
 #### Git环境搭建
 
 `wget https://github.com/git/git/archive/v2.9.5.zip`<br/>
+`apt install unzip`<br/>
 `unzip v2.9.5.zip`<br/>
 `cd git-2.9.5`<br/>
 `make prefix=/usr/local/git all`<br/>
