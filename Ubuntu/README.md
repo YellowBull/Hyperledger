@@ -50,7 +50,7 @@
 `apt-get install python-pip` <br/>
 
 #### 安装完成后，接下来从DaoClound安装Docker-compose，运行脚本：
-`curl -L http://get.daocloud.io/docker/compose/releases/download/1.10.1/docker-compose-\`uname -s\`-\`uname -m\` > ~/docker-compose ` <br/>
+`curl -L http://get.daocloud.io/docker/compose/releases/download/1.10.1/docker-compose-`\`uname -s\`-\`uname -m\` > ~/docker-compose ` <br/>
 `sudo mv ~/docker-compose /usr/local/bin/docker-compose ` <br/>
 `chmod +x /usr/local/bin/docker-compose` <br/>
 
