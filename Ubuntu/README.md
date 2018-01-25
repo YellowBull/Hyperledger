@@ -116,7 +116,7 @@ export PATH=$PATH:$HOME/go/bin
 
 #### 设置peer节点的docker-compose文件
 e2e_cli中提供了多个yaml文件，我们可以基于docker-compose-cli.yaml文件创建：<br/>
-cp docker-compose-cli.yaml docker-compose-peer.yaml <br/>
+`cp docker-compose-cli.yaml docker-compose-peer.yaml` <br/>
 
 然后修改docker-compose-peer.yaml，去掉orderer的配置，只保留一个peer和cli，因为我们要多级部署，节点与节点之前又是通过主机名通讯，所以需要修改容器中的host文件，也就是extra_hosts设置，修改后的peer配置如下：<br/>
 
@@ -127,7 +127,7 @@ peer0.org1.example.com:
     file:  base/docker-compose-base.yaml
     service: peer0.org1.example.com
   extra_hosts:
-   - "orderer.example.com:10.174.13.185"
+    - "orderer.example.com:59.80.30.162" 
 ```
 同样，cli也需要能够和各个节点通讯，所以cli下面也需要添加extra_hosts设置，去掉无效的依赖，并且去掉command这一行，因为我们是每个peer都会有个对应的客户端，也就是cli，所以我只需要去手动执行一次命令，而不是自动运行。修改后的cli配置如下：<br/>
 
@@ -155,14 +155,14 @@ cli:
       - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ 
       - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/ 
       - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts 
-  depends_on: 
-    - peer0.org1.example.com 
-  extra_hosts: 
-   - "orderer.example.com:10.174.13.185" 
-   - "peer0.org1.example.com:10.51.120.220" 
-   - "peer1.org1.example.com:10.51.126.19" 
-   - "peer0.org2.example.com:10.51.116.133" 
-   - "peer1.org2.example.com:10.51.126.5"
+    depends_on: 
+     - peer0.org1.example.com 
+    extra_hosts: 
+     - "orderer.example.com:59.80.30.162" 
+     - "peer0.org1.example.com:59.80.30.178" 
+     - "peer1.org1.example.com:59.80.30.179" 
+     - "peer0.org2.example.com:59.80.30.180" 
+     - "peer1.org2.example.com:59.80.30.165"
 ```
 
 在单击模式下，4个peer会映射主机不同的端口，但是我们在多机部署的时候是不需要映射不同端口的，所以需要修改base/docker-compose-base.yaml文件，将所有peer的端口映射都改为相同的：<br/>
@@ -185,7 +185,7 @@ orderer服务器上我们只需要保留order设置，其他peer和cli设置都�
 `rm e2e_cli –R`<br/>
 然后再登录到orderer服务器上，退回到examples文件夹，因为这样可以方便的把其下的e2e_cli文件夹整个传到peer0服务器上。<br/>
 
-`scp -r e2e_cli fabric@10.51.120.220:/home/fabric/go/src/github.com/hyperledger/fabric/examples/`<br/>
+`scp -r e2e_cli fabric@59.80.30.178:/home/fabric/go/src/github.com/hyperledger/fabric/examples/`<br/>
 我们在前面配置的就是peer0.org1.example.com上的节点，所以复制过来后不需要做任何修改。<br/>
 
 再次运行scp命令，复制到peer1.org1.example.com上，然后我们需要对docker-compose-peer.yaml做一个小小的修改，将启动的容器改为peer1.org1.example.com，并且添加peer0.org1.example.com的IP映射，对应的cli中也改成对peer1.org1.example.com的依赖。这是修改后的peer1.org1.example.com上的配置文件：<br/>
@@ -195,14 +195,13 @@ version: '2'
 
 services:
 
-  peer1.org1.example.com: 
-    container_name: peer1.org1.example.com 
+  peer0.org1.example.com: 
+    container_name: peer0.org1.example.com 
     extends: 
       file:  base/docker-compose-base.yaml 
-      service: peer1.org1.example.com 
+      service: peer0.org1.example.com 
     extra_hosts: 
-     - "orderer.example.com:10.174.13.185" 
-     - "peer0.org1.example.com:10.51.120.220"
+     - "orderer.example.com:59.80.30.162" 
 
   cli: 
     container_name: cli 
@@ -213,28 +212,28 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock 
       - CORE_LOGGING_LEVEL=DEBUG 
       - CORE_PEER_ID=cli 
-      - CORE_PEER_ADDRESS=peer1.org1.example.com:7051 
+      - CORE_PEER_ADDRESS=peer0.org1.example.com:7051 
       - CORE_PEER_LOCALMSPID=Org1MSP 
       - CORE_PEER_TLS_ENABLED=true 
-      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/server.crt 
-      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/server.key 
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt 
-      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp 
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer 
-    volumes: 
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
         - /var/run/:/host/var/run/ 
         - ../chaincode/go/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go 
-         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ 
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ 
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/ 
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts 
     depends_on: 
-      - peer1.org1.example.com 
+      - peer0.org1.example.com 
     extra_hosts: 
-     - "orderer.example.com:10.174.13.185" 
-     - "peer0.org1.example.com:10.51.120.220" 
-     - "peer1.org1.example.com:10.51.126.19" 
-     - "peer0.org2.example.com:10.51.116.133" 
-     - "peer1.org2.example.com:10.51.126.5"
+     - "orderer.example.com:59.80.30.162" 
+     - "peer0.org1.example.com:59.80.30.178" 
+     - "peer1.org1.example.com:59.80.30.179" 
+     - "peer0.org2.example.com:59.80.30.180" 
+     - "peer1.org2.example.com:59.80.30.165"
 ```
 接下来继续使用scp命令将orderer上的文件夹传送给peer0.org2.example.com和peer1.org2.example.com，然后也是修改一下docker-compose-peer.yaml文件，使得其启动对应的peer节点。<br/>
 
