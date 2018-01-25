@@ -59,6 +59,22 @@
 golang 安装包自己去官网下载，自己安装<br/>
 然后用lrzsz工具导入<br/>
 `apt-get install lrzsz`<br/>
+解压到/usr/local
+`tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz`
+配置环境变量
+`vim ~/.profile`
+```javascript
+export PATH=$PATH:/usr/local/go/bin 
+export GOROOT=/usr/local/go 
+export GOPATH=$HOME/go 
+export PATH=$PATH:$HOME/go/bin
+```
+生效环境变量 <br/>
+`source ~/.profile` <br/>
+创建工作空间 <br/>
+`cd ~` <br/>
+`mkdir go` <br/>
+下载fabric源码 <br/>
 `go get github.com/hyperledger/fabric` <br/>
 
 #### 这个可能等的时间比较久，等完成后，我们可以在~/go/src/github.com/hyperledger/fabric中找到所有的最新的源代码。
