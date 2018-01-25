@@ -59,10 +59,10 @@
 golang 安装包自己去官网下载，自己安装<br/>
 然后用lrzsz工具导入<br/>
 `apt-get install lrzsz`<br/>
-解压到/usr/local
-`tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz`
-配置环境变量
-`vim ~/.profile`
+解压到/usr/local<br/>
+`tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz`<br/>
+配置环境变量<br/>
+`vim ~/.profile`<br/>
 ```javascript
 export PATH=$PATH:/usr/local/go/bin 
 export GOROOT=/usr/local/go 
