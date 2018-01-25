@@ -56,6 +56,9 @@
 
 #### Fabric源码下载
 
+golang 安装包自己去官网下载，自己安装<br/>
+然后用lrzsz工具导入<br/>
+`apt-get install lrzsz`<br/>
 `go get github.com/hyperledger/fabric` <br/>
 
 #### 这个可能等的时间比较久，等完成后，我们可以在~/go/src/github.com/hyperledger/fabric中找到所有的最新的源代码。
