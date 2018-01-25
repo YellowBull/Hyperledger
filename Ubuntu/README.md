@@ -53,9 +53,18 @@
 `curl -L http://get.daocloud.io/docker/compose/releases/download/1.10.1/docker-compose-`\`uname -s\`-\`uname -m\` > ~/docker-compose <br/>
 `sudo mv ~/docker-compose /usr/local/bin/docker-compose ` <br/>
 `chmod +x /usr/local/bin/docker-compose` <br/>
+#### Git环境搭建
 
-#### Fabric源码下载
+`wget https://github.com/git/git/archive/v2.9.5.zip`<br/>
+`unzip v2.9.5.zip`<br/>
+`cd git-2.9.5`<br/>
+`make prefix=/usr/local/git all`<br/>
+`make prefix=/usr/local/git install`<br/>
+`vim /etc/profile`<br/>
+`export PATH=/usr/local/git/bin:$PATH`<br/>
+`source /etc/profile`<br/>
 
+#### Golang环境搭建
 golang 安装包自己去官网下载，自己安装<br/>
 然后用lrzsz工具导入<br/>
 `apt-get install lrzsz`<br/>
@@ -74,6 +83,8 @@ export PATH=$PATH:$HOME/go/bin
 创建工作空间 <br/>
 `cd ~` <br/>
 `mkdir go` <br/>
+#### Fabric源码下载
+
 下载fabric源码 <br/>
 `go get github.com/hyperledger/fabric` <br/>
 
