@@ -19,7 +19,7 @@ centos下安装mysql<br/>
 `systemctl enable mariadb.service`<br/>
 进行一些安全设置，以及修改数据库管理员密码<br/>
 `mysql_sceure_installation`<br/>
-测试<br/>
+测试<br/> 
 `mysql -u root -p`<br/>
 
 ### 运行位于下的数据库设置脚本 db/fabricexplorer.sql
