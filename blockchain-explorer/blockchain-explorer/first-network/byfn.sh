@@ -53,16 +53,16 @@ function printHelp () {
   echo "Typically, one would first generate the required certificates and "
   echo "genesis block, then bring up the network. e.g.:"
   echo
-  echo "	byfn.sh -m generate -c mychannel"
-  echo "	byfn.sh -m up -c mychannel -s couchdb"
-  echo "	byfn.sh -m up -l node"
-  echo "	byfn.sh -m down -c mychannel"
-  echo "	byfn.sh -m up -a"
+  echo "        byfn.sh -m generate -c mychannel"
+  echo "        byfn.sh -m up -c mychannel -s couchdb"
+  echo "        byfn.sh -m up -l node"
+  echo "        byfn.sh -m down -c mychannel"
+  echo "        byfn.sh -m up -a"
   echo
   echo "Taking all defaults:"
-  echo "	byfn.sh -m generate"
-  echo "	byfn.sh -m up"
-  echo "	byfn.sh -m down"
+  echo "        byfn.sh -m generate"
+  echo "        byfn.sh -m up"
+  echo "        byfn.sh -m down"
 }
 
 # Ask user for confirmation to proceed

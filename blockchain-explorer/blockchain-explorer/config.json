@@ -1,31 +1,64 @@
+#fabric-sdk-node MSP配置文件fabric-sdk-node/test/fixtures/channel/crypto-config
+
+#blockchain-explorer/fabric-explorer/config.json 开启TLS
+"enableTls":true
+
+#同时配置数据库连接信息
+"mysql":{
+  "host":"127.0.0.1",
+  "database":"fabricexplorer",
+  "username":"root",
+  "passwd":"123456"
+}
+
+#相关配置
+#blockchain-explorer/fabric-explorer/app/network-config-tls.json
+#原来是2个组织，每个组织2个节点，e2e环境为2个组织，每个组织1个节点修改如下
+
+
 {
-    "network-config": {	
+	"network-config": {
+		"orderer": [{
+			"url": "grpcs://127.0.0.1:7050",
+			"server-hostname": "orderer0.example.com",
+			"tls_cacerts": "/root/blockchain-explorer/first-network/crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem"
+		}],
 		"org1": {
 			"name": "peerOrg1",
 			"mspid": "Org1MSP",
+			"ca": "https://127.0.0.1:7054",
 			"peer1": {
 				"requests": "grpcs://127.0.0.1:7051",
 				"events": "grpcs://127.0.0.1:7053",
 				"server-hostname": "peer0.org1.example.com",
-				"tls_cacerts": "/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
-			},			
+				"tls_cacerts": "/root/blockchain-explorer/first-network/crypto-config/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem"
+			},
 			"admin": {
-				"key": "/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore",
-				"cert": "/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts"
+				"key": "/root/blockchain-explorer/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore",
+				"cert": "/root/blockchain-explorer/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts"
 			}
-		}		
-	},
-   "host":"localhost",
-   "port":"8080",
-   "channel": "mychannel",
-   "GOPATH":"../artifacts",
-   "keyValueStore":"/tmp/fabric-client-kvs",
-   "eventWaitTime":"30000",     
-   "mysql":{
-      "host":"127.0.0.1",
-      "port":"3306",
-      "database":"fabricexplorer",
-      "username":"root",
-      "passwd":"123456"
-   }
+		},
+		"org2": {
+			"name": "peerOrg2",
+			"mspid": "Org2MSP",
+			"ca": "https://127.0.0.1:8054",
+			"peer1": {
+				"requests": "grpcs://127.0.0.1:9051",
+				"events": "grpcs://127.0.0.1:9053",
+				"server-hostname": "peer0.org2.example.com",
+				"tls_cacerts": "/root/blockchain-explorer/first-network/crypto-config/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem"
+			},
+			"admin": {
+				"key": "/root/blockchain-explorer/first-network/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore",
+				"cert": "/root/blockchain-explorer/first-network/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts"
+			}
+		}
+	}
 }
+
+#启动blockchain-explorer脚本start.sh
+node main.js >log.log 2>&1 &
+
+#调试阶段可以直接node main.js
+
+#访问宿主机8080端口
